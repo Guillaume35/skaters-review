@@ -1,0 +1,1 @@
+export type InputType = "text" | "textarea" | "date" | "time" | "datetime" | "number" | "float" | "integer" | "boolean"
