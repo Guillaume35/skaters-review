@@ -1,12 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View } from 'react-native';
+import { SafeAreaView, StyleSheet, View } from 'react-native';
 import { Button, Text } from './components/ui';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
-import { useCallback } from 'react';
+import { ReactNode, useCallback } from 'react';
 import { variables } from './shared/globalStyles';
 import TextInput from './components/ui/Form/TextInput';
 import FormInput from './components/ui/Form/FormInput';
+import OnboardingController from './components/Onboarding/OnboardingController';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -25,20 +26,30 @@ export default function App() {
 	if (!fontsLoaded && !fontError) {
 		return null;
 	}
+
+	let items: ReactNode[] = []
+
+	items.push((
+		<FormInput label="Votre nom ?" size="xl" labelStyle={{textAlign: "center", color: variables.color.light, marginBottom: variables.contentMargin[2]}}>
+			<TextInput placeholder="Guillaume" size="lg" />
+		</FormInput>
+	))
+
+	items.push((
+		<FormInput label="Votre pseudo ?" size="xl">
+			<TextInput placeholder="Guigui" size="xl" />
+		</FormInput>
+	))
 	
 	return (
 		<View style={styles.container} onLayout={onLayoutRootView}>
-			<Text style={{marginBottom: 12, fontSize: 18, textAlign: "center", color: variables.color.grey}}>La nouvelle Skaters Team app pour iOs et Android !</Text>
-			<Button title="Mon bouton" variant="primary" size="xl" />
-			<Button title="Bouton 1" variant="errorOutline" size="lg" />
-			<Button title="Dark" variant="dark" />
-			<Button title="Error" variant="error" />
-			<Button title="Error" variant="errorOutline" />
-			<Button title="Success" variant="success" />
-			<Button title="Light" variant="light" />
-			<FormInput label="Votre nom ?" size="xl">
-				<TextInput placeholder="Guillaume" size="xl" />
-			</FormInput>
+			
+			<SafeAreaView>
+				<OnboardingController
+					items={items}
+				/>
+			</SafeAreaView>
+			
 			<StatusBar style="auto" />
 		</View>
 	);
@@ -47,7 +58,7 @@ export default function App() {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: '#fff',
+		backgroundColor: variables.color.black,
 		alignItems: 'center',
 		justifyContent: 'center',
 	},
