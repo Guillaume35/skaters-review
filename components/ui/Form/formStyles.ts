@@ -8,9 +8,9 @@ export const formStyles = StyleSheet.create({
         paddingVertical: variables.contentPadding[2],
         borderRadius: variables.borderRadius[2],
         backgroundColor: variables.color.white,
-        borderWidth: 1,
-        borderBottomWidth: 3,
-        borderColor: chroma(variables.color.light).darken(0.3).hex(),
+        //borderWidth: 1,
+        //borderBottomWidth: 3,
+        //borderColor: chroma(variables.color.light).darken(0.3).hex(),
         fontFamily: "Rubik-Regular",
         width: "100%"
     },
@@ -29,14 +29,12 @@ export const formStyles = StyleSheet.create({
     lg: {
         paddingHorizontal: variables.contentPadding[3],
         paddingVertical: variables.contentPadding[2],
-        fontSize: 18,
-        fontFamily: "Rubik-Medium"
+        fontSize: 20
     },
 
     xl: {
         paddingHorizontal: variables.contentPadding[4],
         paddingVertical: variables.contentPadding[3],
-        fontSize: 22,
-        fontFamily: "Rubik-Medium"
+        fontSize: 26
     },
 })

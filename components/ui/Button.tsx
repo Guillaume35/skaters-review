@@ -7,16 +7,17 @@ import { SizeType } from "./types/SizeType"
 
 const styles = StyleSheet.create({
     button: {
-        paddingHorizontal: variables.contentPadding[3],
+        paddingHorizontal: variables.contentPadding[4],
         paddingVertical: variables.contentPadding[2],
         borderWidth: 1,
-        borderBottomWidth: 3,
+        borderBottomWidth: 5,
         flexDirection: "row",
         alignItems: "center",
-        borderRadius: 100,
-        shadowColor: "black",
-        shadowOpacity: 0.1,
-        shadowRadius: 5,
+        justifyContent: "center",
+        borderRadius: 16,
+        shadowColor: variables.color.black,
+        shadowOpacity: 0.3,
+        shadowRadius: 8,
         shadowOffset: {
             width: 0,
             height: 5
@@ -29,13 +30,13 @@ const styles = StyleSheet.create({
     },
 
     lg: {
-        paddingHorizontal: variables.contentPadding[4],
+        paddingHorizontal: variables.contentPadding[7],
         paddingVertical: variables.contentPadding[3],
     },
 
     xl: {
-        paddingHorizontal: variables.contentPadding[4],
-        paddingVertical: variables.contentPadding[3],
+        paddingHorizontal: variables.contentPadding[7],
+        paddingVertical: variables.contentPadding[5],
     },
 
     title_sm: {
@@ -51,8 +52,18 @@ const styles = StyleSheet.create({
     },
 
     primary: {
-        backgroundColor: variables.color.grey,
-        borderColor: chroma(variables.color.grey).darken(0.3).hex()
+        backgroundColor: variables.color.primary,
+        borderColor: chroma(variables.color.primary).darken(0.3).hex()
+    },
+
+    primary1: {
+        backgroundColor: variables.color.primary1,
+        borderColor: chroma(variables.color.primary1).darken(0.3).hex()
+    },
+
+    primaryAlt: {
+        backgroundColor: variables.color.primaryAlt,
+        borderColor: chroma(variables.color.primaryAlt).darken(0.6).hex()
     },
 
     base: {
@@ -91,7 +102,12 @@ const styles = StyleSheet.create({
 
     buttonTitle: {
         color: "white",
-        fontFamily: "Rubik-Medium"
+        fontFamily: "Rubik-Regular",
+        textAlign: "center"
+    },
+
+    buttonTitleBlack: {
+        color: variables.color.black
     },
 
     buttonTitleBase: {
@@ -104,26 +120,32 @@ const styles = StyleSheet.create({
 
     buttonTitleErrorOutline: {
         color: chroma(variables.color.danger).darken(0.3).hex()
+    },
+
+    inkBorder: {
+        borderColor: variables.color.black
     }
 })
 
-type VariantType = "primary" | "error" | "errorOutline" | "success" | "light" | "dark" | "base"
+type VariantType = "primary" | "primary1" | "primaryAlt" | "error" | "errorOutline" | "success" | "light" | "dark" | "base"
 
 type ButtonOptions = {
     onPress?: () => void,
     variant?: VariantType,
     title: string,
     icon?: ReactNode,
-    size?: SizeType
+    size?: SizeType,
+    inkBorder?: boolean
 }
 
 const TEXT_STYLE = {
     base: styles.buttonTitleBase,
     errorOutline: styles.buttonTitleErrorOutline,
-    light: styles.buttonTitleLight
+    light: styles.buttonTitleLight,
+    primaryAlt: styles.buttonTitleBlack
 }
 
-export default function Button({onPress, variant, title, icon, size}: ButtonOptions) {
+export default function Button({onPress, variant, title, icon, size, inkBorder}: ButtonOptions) {
 
     variant = variant || "base"
 
@@ -141,9 +163,13 @@ export default function Button({onPress, variant, title, icon, size}: ButtonOpti
         titleStyle.push(TEXT_STYLE[variant as keyof typeof TEXT_STYLE])
     }
 
+    if (inkBorder) {
+        subStyle.push(styles.inkBorder)
+    }
+
     return (
         <TouchableOpacity onPress={onPress}>
-            <View style={[styles.button, styles[variant]]}>
+            <View style={[styles.button, styles[variant], subStyle]}>
                 {icon && <View style={styles.icon}>{icon}</View>}
                 <Text style={titleStyle}>{title}</Text>
             </View>

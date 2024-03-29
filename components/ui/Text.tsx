@@ -1,14 +1,9 @@
 import { Text as ReactText, StyleProp, StyleSheet, TextStyle } from "react-native"
 import { SizeType } from "./types/SizeType"
 import { variables } from "../../shared/globalStyles"
+import { TextOptions } from "./types/TextOptions"
 
-type TextOptions = {
-    style?: StyleProp<TextStyle>,
-    children: string,
-    size?: SizeType
-}
-
-export default function Text({style, children, size}: TextOptions) {
+export default function Text({style, children, size, ...rest}: TextOptions) {
 
     let subStyle = []
 
@@ -17,7 +12,7 @@ export default function Text({style, children, size}: TextOptions) {
     }
 
     return (
-        <ReactText style={[styles.text, style, ...subStyle]}>{children}</ReactText>
+        <ReactText {...rest} style={[styles.text, style, ...subStyle]}>{children}</ReactText>
     )
 }
 
@@ -31,7 +26,7 @@ const styles = StyleSheet.create({
     },
 
     lg: {
-        fontSize: variables.fontSize[2]
+        fontSize: variables.fontSize[3]
     },
 
     xl: {
