@@ -45,9 +45,6 @@ export default function App() {
 		<View style={styles.container} onLayout={onLayoutRootView}>
 			
 			<SafeAreaView>
-				<OnboardingController
-					items={items}
-				/>
 			</SafeAreaView>
 			
 			<StatusBar style="auto" />

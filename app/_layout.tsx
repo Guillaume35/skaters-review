@@ -4,8 +4,8 @@ import { SafeAreaView, View } from "react-native";
 import { SplashScreen } from "expo-router";
 import { useCallback } from "react";
 import { useFonts } from 'expo-font';
-import Onboarding from "../components/Onboarding/Onboarding";
 import { globalStyle } from "../shared/globalStyles";
+import Onboarding from "../components/Onboarding/Onboarding";
 
 SplashScreen.preventAutoHideAsync();
 
